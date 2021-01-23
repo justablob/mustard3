@@ -49,7 +49,7 @@ Data is encoded in a compact binary format.
     ServerSaltedCredential :: HMAC(ServerHello.ServerSalt, Client.SaltedCredential)
         Used to create verifiers. The server stores this in an encrypted form.
 
-<- ClientLast
+<- ClientFinished
     ClientSaltedPrekey :: HKDF(ServerFirst.ClientPrekeySalt, Client.SaltedCredential, 64, "ClientSaltedPrekey")
         Key used to decrypt the credential hash on the server.
 
@@ -60,13 +60,13 @@ Data is encoded in a compact binary format.
     StoredCredential ::
         Encrypted credential hash, retrieved from database.
 
-    ServerSaltedPrekey :: HKDF(Server.ServerPrekeySalt, ClientLast.ClientSaltedPrekey, 32, "ServerSaltedPrekey")
+    ServerSaltedPrekey :: HKDF(Server.ServerPrekeySalt, ClientFinished.ClientSaltedPrekey, 32, "ServerSaltedPrekey")
         Key used to decrypt StoredToken into ServerSaltedCredential.
 
     ServerSaltedCredential :: Decrypt(Server.ServerPartialKey, Server.StoredToken)
         Equal to Client.ServerSaltedCredential.
 
--> ServerLast
+-> ServerFinished
     ServerVerifier :: HKDF(Server.ServerSaltedCredential, ServerHello.ServerRandom | ClientHello.ClientRandom, 64, "ServerVerifier")
         Server verifier.
 
