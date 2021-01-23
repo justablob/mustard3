@@ -1,0 +1,24 @@
+SALT_LENGTH = 32
+HASH_LENGTH = 64
+IV_LENGTH = 16
+
+ClientHello (
+  char[*] Identifier
+  byte[SALT_LENGTH] ClientRandom
+)
+
+ServerHello (
+  byte[SALT_LENGTH] ServerRandom
+  byte[SALT_LENGTH] ClientSalt
+  byte[SALT_LENGTH] ServerSalt
+  byte[SALT_LENGTH] ClientPrekeySalt
+)
+
+ClientFinished (
+  byte[HASH_LENGTH] ClientSaltedPrekey
+  byte[HASH_LENGTH] ClientVerifier
+)
+
+ServerFinished (
+  byte[HASH_LENGTH] ServerVerifier
+)

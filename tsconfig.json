@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "outDir": "./lib",
+    "declaration": true
+  },
+  "include": [
+    "./src/**/*.ts"
+  ]
+}
